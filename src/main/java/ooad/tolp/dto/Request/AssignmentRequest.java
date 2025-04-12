@@ -1,4 +1,4 @@
-package ooad.tolp.dto;
+package ooad.tolp.dto.Request;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
