@@ -1,6 +1,6 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.QnARequest;
+import ooad.tolp.dto.Request.QnARequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,5 +18,16 @@ public class QnAController {
     public ResponseEntity<String> replyToQuestion(@PathVariable Long parentId, @RequestBody QnARequest request) {
         // TODO: 답글 등록 처리
         return ResponseEntity.ok("답글 등록 완료");
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateQnA(@PathVariable Long id, @RequestBody QnARequest request) {
+        // TODO: 질문 답글 수정
+        return ResponseEntity.ok("수정 완료");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteQnA(@PathVariable Long id) {
+        // TODO: 질문 답글 삭제
+        return ResponseEntity.ok("삭제 완료");
     }
 }

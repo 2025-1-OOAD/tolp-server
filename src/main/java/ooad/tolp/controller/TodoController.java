@@ -1,8 +1,12 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.TodoRequest;
+import ooad.tolp.dto.Request.TodoRequest;
+import ooad.tolp.dto.Response.TodoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
@@ -25,4 +29,12 @@ public class TodoController {
         // TODO: 완료된 할일 조회
         return ResponseEntity.ok("완료된 목록 반환");
     }
+
+    @GetMapping("/all/{userId}")
+    public ResponseEntity<List<TodoResponse>> getAllTodos(@PathVariable Long userId){
+        // TODO: 미완료 할일 조회
+        List<TodoResponse> todos = new ArrayList<>();
+        return ResponseEntity.ok(todos);
+    }
+
 }

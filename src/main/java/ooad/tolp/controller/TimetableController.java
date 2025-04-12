@@ -1,6 +1,6 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.TimetableUpdateRequest;
+import ooad.tolp.dto.Request.TimetableUpdateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,4 +19,16 @@ public class TimetableController {
         // TODO: 시간표에 강의 추가
         return ResponseEntity.ok("강의 추가 완료");
     }
+    @DeleteMapping("/{userId}/lecture/{lectureId}")
+    public ResponseEntity<String> removeLectureFromTimetable(){
+        // TODO: 시간표에 강의 삭제
+        return ResponseEntity.ok("강의 삭제 완료");
+    }
+
+    @PutMapping("/{userId}/lecture/{lectureId}")
+    public ResponseEntity<String> updateLectureTime(){
+        // TODO: 시간표에 있는 강의 수정
+        return ResponseEntity.ok("강의 수정 완료");
+    }
+
 }

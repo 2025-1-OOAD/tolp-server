@@ -1,8 +1,13 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.LectureRequest;
+import ooad.tolp.dto.Request.LectureRequest;
+import ooad.tolp.dto.Request.LectureVideoRequest;
+import ooad.tolp.dto.Response.LectureVideoResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/lectures")
@@ -25,4 +30,24 @@ public class LectureController {
         // TODO: 강의 검색 처리
         return ResponseEntity.ok("검색 결과 반환");
     }
+
+    @PutMapping("/videos/{videoId}")
+    public ResponseEntity<String> updateVideo(@PathVariable Long videoId, @RequestBody LectureVideoRequest request){
+        // TODO: 강의 영상 업로드
+        return ResponseEntity.ok("강의 영상 업로드");
+    }
+
+    @DeleteMapping("/videos/{videoId}")
+    public ResponseEntity<String> deleteVideo(@PathVariable Long videoId){
+        // TODO: 강의 영상 삭제
+        return ResponseEntity.ok("강의 영상 삭제");
+    }
+
+    @GetMapping("/{lectureId}/videos")
+    public ResponseEntity<List<LectureVideoResponse>> getLectureVideos(@PathVariable Long lectureId) {
+        List<LectureVideoResponse> videos = new ArrayList<>();
+        // TODO: 실제 서비스 호출
+        return ResponseEntity.ok(videos);
+    }
+
 }

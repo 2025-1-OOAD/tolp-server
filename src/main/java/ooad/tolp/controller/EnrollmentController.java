@@ -1,6 +1,6 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.EnrollmentRequest;
+import ooad.tolp.dto.Request.EnrollmentRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
@@ -13,9 +13,9 @@ public class EnrollmentController {
         return ResponseEntity.ok("수강 신청 완료");
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> cancel(@PathVariable Long id) {
-        // TODO: 수강 취소 처리
-        return ResponseEntity.ok("수강 취소 완료");
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> cancel(@PathVariable Long id) {
+//        // TODO: 수강 취소 처리
+//        return ResponseEntity.ok("수강 취소 완료");
+//    }
 }

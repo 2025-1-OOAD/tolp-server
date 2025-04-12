@@ -1,7 +1,9 @@
 package ooad.tolp.controller;
 
-import ooad.tolp.dto.QuizAnswerRequest;
-import ooad.tolp.dto.QuizRequest;
+import ooad.tolp.dto.Request.GradeRequest;
+import ooad.tolp.dto.Request.QuizAnswerRequest;
+import ooad.tolp.dto.Request.QuizRequest;
+import ooad.tolp.dto.Response.SubmissionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,4 +22,18 @@ public class QuizController {
         // TODO: 퀴즈 제출 처리
         return ResponseEntity.ok("퀴즈 제출 완료");
     }
+    @PostMapping("/grade")
+    public ResponseEntity<String> gradeSubmission(@RequestBody GradeRequest request){
+        // TODO: 성적 부여
+        return ResponseEntity.ok("퀴즈 채점 완료");
+    }
+
+    @GetMapping("/submissions/{submissionId}")
+    public ResponseEntity<SubmissionResponse> getQuizResult(@PathVariable Long submissionId){
+        SubmissionResponse submission = new SubmissionResponse();
+        submission.setId(submissionId);
+        // TODO: 점수 확인
+        return ResponseEntity.ok(submission);
+    }
+
 }
