@@ -1,5 +1,7 @@
 package ooad.tolp.entity;
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -11,6 +13,9 @@ public class Lecture {
     private String title;
     private String syllabus;
     private int durationDays;
+    private boolean isDeleted = false;
+    private LocalDateTime createdAt;
+
 
     @ManyToOne
     private User instructor;

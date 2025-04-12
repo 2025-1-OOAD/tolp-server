@@ -12,6 +12,9 @@ public class QnA {
     private String content;
     private LocalDateTime createdAt;
 
+    private LocalDateTime modifiedAt;
+    private boolean isDeleted = false;
+
     @ManyToOne
     private User writer;
 

@@ -11,6 +11,8 @@ public class LectureVideo {
     private String title;
     private String videoUrl;
     private LocalDateTime postedAt;
+    private boolean isDeleted = false;
+
 
     @ManyToOne
     private Lecture lecture;
