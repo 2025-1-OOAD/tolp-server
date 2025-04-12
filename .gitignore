@@ -1,0 +1,27 @@
+# MacOS 시스템 파일
+.DS_Store
+
+# Gradle
+.gradle/
+build/
+out/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+
+# 로그 파일
+*.log
+
+# 테스트/임시 파일
+*.tmp
+*.bak
+
+# 컴파일된 클래스 파일
+*.class
+
+# 기타 IDE 캐시
+.vscode/
