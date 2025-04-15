@@ -1,6 +1,6 @@
 package ooad.tolp.quiz.domain;
 import jakarta.persistence.*;
-import ooad.tolp.assignment.domain.Submission;
+import ooad.tolp.assignment.domain.AssignmentSubmission;
 import ooad.tolp.lecture.domain.Lecture;
 
 import java.time.LocalDateTime;
@@ -22,5 +22,5 @@ public class Quiz {
     private Lecture lecture;
 
     @OneToMany(mappedBy = "quiz")
-    private List<Submission> submissions;
+    private List<AssignmentSubmission> submissions;
 }

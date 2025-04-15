@@ -10,7 +10,7 @@ import ooad.tolp.user.domain.User;
 import java.time.LocalDateTime;
 
 @Entity
-public class Submission {
+public class QuizSubmission {
     @Id @GeneratedValue
     private Long id;
 

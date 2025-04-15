@@ -19,5 +19,5 @@ public class Assignment {
     private Lecture lecture;
 
     @OneToMany(mappedBy = "assignment")
-    private List<Submission> submissions;
+    private List<AssignmentSubmission> submissions;
 }

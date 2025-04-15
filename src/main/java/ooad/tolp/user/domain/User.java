@@ -1,6 +1,6 @@
 package ooad.tolp.user.domain;
 import jakarta.persistence.*;
-import ooad.tolp.assignment.domain.Submission;
+import ooad.tolp.assignment.domain.AssignmentSubmission;
 import ooad.tolp.enrollment.domain.Enrollment;
 import ooad.tolp.lecture.domain.Lecture;
 import ooad.tolp.qna.domain.QnA;
@@ -31,7 +31,7 @@ public class User {
     private List<Enrollment> enrollments;
 
     @OneToMany(mappedBy = "student")
-    private List<Submission> submissions;
+    private List<AssignmentSubmission> submissions;
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todos;
