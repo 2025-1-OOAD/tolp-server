@@ -36,5 +36,4 @@ public class TodoController {
         List<TodoResponse> todos = new ArrayList<>();
         return ResponseEntity.ok(todos);
     }
-
 }
