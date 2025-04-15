@@ -1,13 +1,14 @@
 package ooad.tolp.quiz.dto;
+
+import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuizRequest {
-    private Long lectureId;
     private String title;
     private List<String> questionList;
     private LocalDateTime deadline;

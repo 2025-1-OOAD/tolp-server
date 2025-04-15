@@ -1,10 +1,13 @@
 package ooad.tolp.assignment.dto;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubmissionRequest {
-    private Long studentId;
     private String content;
+    private Long assignmentId; // nullable
+    private Long quizId;       // nullable
 }

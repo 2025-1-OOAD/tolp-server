@@ -1,10 +1,11 @@
 package ooad.tolp.assignment.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class GradeRequest {
     private Long submissionId;
     private Integer score;

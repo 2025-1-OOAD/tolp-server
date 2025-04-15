@@ -1,11 +1,12 @@
 package ooad.tolp.lecture.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LectureVideoResponse {
     private Long id;
     private String title;

@@ -1,10 +1,12 @@
 package ooad.tolp.quiz.dto;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuizAnswerRequest {
-    private Long studentId;
+    private Long quizId;
     private String content;
 }
