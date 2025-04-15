@@ -1,6 +1,7 @@
 package ooad.tolp.quiz.controller;
 
 import ooad.tolp.quiz.dto.*;
+import ooad.tolp.global.security.common.dto.GradeRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package ooad.tolp.quiz.dto;
+package ooad.tolp.global.security.common.dto;
 
 import lombok.*;
 
