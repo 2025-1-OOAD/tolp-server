@@ -1,6 +1,6 @@
-package ooad.tolp.qna.service;
+package ooad.tolp.lecture.service;
 
-import ooad.tolp.qna.dto.QnARequest;
+import ooad.tolp.lecture.dto.QnARequest;
 import org.springframework.stereotype.Service;
 
 @Service

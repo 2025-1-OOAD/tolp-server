@@ -3,7 +3,7 @@ import jakarta.persistence.*;
 import ooad.tolp.assignment.domain.AssignmentSubmission;
 import ooad.tolp.enrollment.domain.Enrollment;
 import ooad.tolp.lecture.domain.Lecture;
-import ooad.tolp.qna.domain.QnA;
+import ooad.tolp.lecture.domain.QnA;
 import ooad.tolp.timetable.domain.Timetable;
 import ooad.tolp.todo.domain.Todo;
 

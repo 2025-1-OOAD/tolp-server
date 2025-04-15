@@ -1,6 +1,5 @@
-package ooad.tolp.qna.domain;
+package ooad.tolp.lecture.domain;
 import jakarta.persistence.*;
-import ooad.tolp.lecture.domain.QnABoard;
 import ooad.tolp.user.domain.User;
 
 import java.time.LocalDateTime;

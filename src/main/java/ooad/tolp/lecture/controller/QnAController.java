@@ -1,6 +1,6 @@
-package ooad.tolp.qna.controller;
+package ooad.tolp.lecture.controller;
 
-import ooad.tolp.qna.dto.QnARequest;
+import ooad.tolp.lecture.dto.QnARequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

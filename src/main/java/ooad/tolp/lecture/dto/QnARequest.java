@@ -1,4 +1,4 @@
-package ooad.tolp.qna.dto;
+package ooad.tolp.lecture.dto;
 import lombok.Getter;
 import lombok.Setter;
 

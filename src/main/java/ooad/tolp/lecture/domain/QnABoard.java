@@ -1,6 +1,5 @@
 package ooad.tolp.lecture.domain;
 import jakarta.persistence.*;
-import ooad.tolp.qna.domain.QnA;
 
 import java.util.List;
 
