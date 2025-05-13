@@ -36,9 +36,22 @@ public class EnrollmentService {
         if (enrollmentRepository.existsByStudentAndLecture(student, lecture)) {
             throw new IllegalArgumentException("이미 신청한 강의입니다.");
         }
+
+        Enrollment enrollment = new Enrollment();
+        enrollment.setStudent(student);
+        enrollment.setLecture(lecture);
+        enrollment.setAccessDeadline(LocalDateTime.now().plusWeeks(4));   // 기본 수강기간 4주
+
+        enrollmentRepository.save(enrollment);
     }
 
+    // 수강 취소 처리
+    @Transactional
     public void cancelEnrollment(Long id) {
         // TODO: 수강 취소 처리
+        Enrollment enrollment = enrollmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("수강 내역을 찾을 수 없습니다."));
+        enrollmentRepository.delete(enrollment);
+
     }
 }

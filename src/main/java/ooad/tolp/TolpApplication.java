@@ -11,17 +11,6 @@ public class TolpApplication {
 		SpringApplication.run(TolpApplication.class, args);
 
 
-
-		try {
-			User user = new User();
-			user.setUsername("tester");
-			user.setEmail("tester@example.com");
-			System.out.println("normal operation: " + user.getUsername());
-
-		} catch (Exception e) {
-			System.out.println("error: " + e.getMessage());
-			e.printStackTrace();
-		}
 	}
 
 
