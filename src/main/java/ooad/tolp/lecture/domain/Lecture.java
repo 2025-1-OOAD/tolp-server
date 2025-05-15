@@ -1,5 +1,6 @@
 package ooad.tolp.lecture.domain;
 import jakarta.persistence.*;
+import lombok.Getter;
 import ooad.tolp.assignment.domain.Assignment;
 import ooad.tolp.enrollment.domain.Enrollment;
 import ooad.tolp.quiz.domain.Quiz;
@@ -10,10 +11,11 @@ import java.util.List;
 
 
 @Entity
+@Getter
 public class Lecture {
     @Id @GeneratedValue
     private Long id;
-
+    private String name;
     private String title;
     private String syllabus;
     private int durationDays;
