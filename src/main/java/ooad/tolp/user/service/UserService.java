@@ -16,15 +16,14 @@ import lombok.RequiredArgsConstructor;
 
 
 // 이클래스틑 서비스 레이어임을 나타냄 스프링 빈으로 등록
-@Service
-
 // final 필드 자동 생성자 주입
 // 생성자 주입을 자동으로 해주는 Lombok 애너테이션
+@Service
 @RequiredArgsConstructor
 public class UserService {
 
     // JPA를 이용한 DB 접근용 리포지토리
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     // BCryptpasswordEncoder 등 (비밀번호 암호화를 위한 인터페이스)
     private final PasswordEncoder passwordEncoder;

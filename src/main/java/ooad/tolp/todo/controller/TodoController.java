@@ -33,10 +33,10 @@ public class TodoController {
     }
 
     @GetMapping("/completed/{userId}")
-    public ResponseEntity<String> getCompletedTodos(@PathVariable Long userId) {
+    public ResponseEntity<List<TodoResponse>> getCompletedTodos(@PathVariable Long userId) {
         // TODO: 완료된 할일 조회
         List<TodoResponse> todos = todoService.getCompletedTodos(userId);
-        return ResponseEntity.ok("완료된 목록 반환");
+        return ResponseEntity.ok(todos);
     }
 
     @GetMapping("/all/{userId}")
