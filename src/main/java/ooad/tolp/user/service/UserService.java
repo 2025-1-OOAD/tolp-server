@@ -6,6 +6,7 @@ import ooad.tolp.user.dto.UserResponse;
 import ooad.tolp.user.domain.User;
 import ooad.tolp.user.domain.User.Role;
 import ooad.tolp.user.repository.UserRepository;
+import ooad.tolp.todo.repository.TodoRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +28,8 @@ public class UserService {
 
     // BCryptpasswordEncoder 등 (비밀번호 암호화를 위한 인터페이스)
     private final PasswordEncoder passwordEncoder;
+
+    private final TodoRepository todoRepository;
 
     // 1) 이메일 중복 체크
     // 2) 비밀번호 암호화
@@ -90,6 +93,7 @@ public class UserService {
         if (!userRepository.existsById(userId)) {
             throw new IllegalArgumentException("사용자를 찾을 수 없습니다.");
         }
+        todoRepository.deleteByUserId(userId);
         userRepository.deleteById(userId);
     }
 

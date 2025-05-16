@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
+    void deleteByUserId(Long userId);
     List<Todo> findByUserIdAndCompletedFalse(Long userId);
     List<Todo> findByUserIdAndCompletedTrue(Long userId);
 }
