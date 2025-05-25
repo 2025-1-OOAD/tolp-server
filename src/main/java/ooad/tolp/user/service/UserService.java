@@ -47,7 +47,7 @@ public class UserService {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 
-        return jwtUtil.generateToken(user); // 🔧 FIX: User 객체 넘기기
+        return jwtUtil.generateToken(user);
     }
 
     public void deleteAccount(Long userId) {
