@@ -20,25 +20,17 @@ import java.util.stream.Collectors;
 public class TodoService {
 
     private final TodoRepository todoRepository;
-    private final UserRepository userRepository;
 
-    public void addTodo(TodoRequest request) {
-        // TODO: 할일 등록 처리
-        User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
-
+    public void addTodo(TodoRequest request, User user) {
         Todo todo = new Todo();
         todo.setContent(request.getContent());
         todo.setCompleted(false);
         todo.setUser(user);
         todo.setCreatedAt(LocalDateTime.now());
-
         todoRepository.save(todo);
-
     }
 
     public void completeTodo(Long todoId) {
-        // TODO: 할일 완료 처리
         Todo todo = todoRepository.findById(todoId)
                 .orElseThrow(() -> new IllegalArgumentException("할 일을 찾을 수 없습니다."));
         todo.setCompleted(true);
@@ -46,14 +38,12 @@ public class TodoService {
     }
 
     public List<TodoResponse> getCompletedTodos(Long userId) {
-        // TODO: 완료된 할일 목록 조회 처리
         return todoRepository.findByUserIdAndCompletedTrue(userId).stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
     public List<TodoResponse> getAllTodos(Long userId) {
-        // TODO: 미완료 할일 목록 조회 처리
         return todoRepository.findByUserIdAndCompletedFalse(userId).stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
@@ -66,5 +56,4 @@ public class TodoService {
         response.setCompleted(todo.getCompleted());
         return response;
     }
-
 }

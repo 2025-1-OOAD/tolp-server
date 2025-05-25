@@ -26,26 +26,19 @@ public class QnAService {
     private final QnABoardRepository qnaBoardRepository;
     private final UserRepository userRepository;
 
-    public QnAResponse postQnA(QnARequest request) {
-        QnABoard board = qnaBoardRepository.findById(request.getBoardId())
-                .orElseThrow(() -> new EntityNotFoundException("QnABoard not found"));
+    public List<QnAResponse> getQnAsByWriter(User writer) {
+        return qnaRepository.findAllByWriter(writer).stream()
+                .map(QnAResponse::fromEntity)
+                .collect(Collectors.toList());
+    }
 
-        User writer = userRepository.findById(request.getWriterId())
-                .orElseThrow(() -> new EntityNotFoundException("Writer not found"));
-
+    public QnAResponse postQnA(QnARequest request, User writer) {
         QnA qna = QnA.builder()
                 .content(request.getContent())
-                .createdAt(LocalDateTime.now())
+                .board(qnaBoardRepository.findById(request.getBoardId()).orElseThrow())
                 .writer(writer)
-                .board(board)
+                .parent(request.getParentId() != null ? qnaRepository.findById(request.getParentId()).orElse(null) : null)
                 .build();
-
-        if (request.getParentId() != null) {
-            QnA parent = qnaRepository.findById(request.getParentId())
-                    .orElseThrow(() -> new EntityNotFoundException("Parent QnA not found"));
-            qna.setParent(parent);
-        }
-
         return QnAResponse.fromEntity(qnaRepository.save(qna));
     }
 

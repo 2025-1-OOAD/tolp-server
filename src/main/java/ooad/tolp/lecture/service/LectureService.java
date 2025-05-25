@@ -23,19 +23,23 @@ public class LectureService {
     private final LectureRepository lectureRepository;
     private final UserRepository userRepository;
 
-    public LectureResponse createLecture(LectureRequest request) {
-        User instructor = userRepository.findById(request.getInstructorId())
-                .orElseThrow(() -> new EntityNotFoundException("Instructor not found"));
+    public List<LectureResponse> getLecturesByInstructor(Long instructorId) {
+        return lectureRepository.findAllByInstructorId(instructorId).stream()
+                .map(LectureResponse::fromEntity)
+                .collect(Collectors.toList());
+    }
 
+    public LectureResponse createLecture(LectureRequest request, User instructor) {
         Lecture lecture = Lecture.builder()
                 .name(request.getName())
                 .syllabus(request.getSyllabus())
                 .durationDays(request.getDurationDays())
                 .instructor(instructor)
+                .isDeleted(false)
                 .build();
-
         return LectureResponse.fromEntity(lectureRepository.save(lecture));
     }
+
 
     public LectureResponse updateLecture(Long id, LectureRequest request) {
         Lecture lecture = lectureRepository.findById(id)
