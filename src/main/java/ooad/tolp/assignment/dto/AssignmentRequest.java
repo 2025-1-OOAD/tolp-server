@@ -1,13 +1,13 @@
 package ooad.tolp.assignment.dto;
-import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class AssignmentRequest {
-    private Long lectureId;
     private String title;
     private String description;
     private LocalDateTime dueDate;
+    private Long lectureId;
 }
