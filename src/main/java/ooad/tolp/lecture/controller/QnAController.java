@@ -1,34 +1,34 @@
-package ooad.tolp.lecture.controller;
+package ooad.tolp.qna.controller;
 
+import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.dto.QnARequest;
+import ooad.tolp.lecture.dto.QnAResponse;
+import ooad.tolp.qna.service.QnAService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/lectures/{lectureId}/qna")
+@RequestMapping("/api/qna")
+@RequiredArgsConstructor
 public class QnAController {
 
+    private final QnAService qnaService;
+
     @PostMapping
-    public ResponseEntity<String> postQuestion(@PathVariable Long lectureId, @RequestBody QnARequest request) {
-        // TODO: 질문 등록 처리
-        return ResponseEntity.ok("질문 등록 완료");
+    public ResponseEntity<QnAResponse> post(@RequestBody QnARequest request) {
+        return ResponseEntity.ok(qnaService.postQnA(request));
     }
 
-    @PostMapping("/{parentId}/reply")
-    public ResponseEntity<String> replyToQuestion(@PathVariable Long lectureId, @PathVariable Long parentId, @RequestBody QnARequest request) {
-        // TODO: 답글 등록 처리
-        return ResponseEntity.ok("답글 등록 완료");
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateQnA(@PathVariable Long lectureId, @PathVariable Long id, @RequestBody QnARequest request) {
-        // TODO: 질문/답글 수정
-        return ResponseEntity.ok("수정 완료");
+    @GetMapping("/board/{boardId}")
+    public ResponseEntity<List<QnAResponse>> getByBoard(@PathVariable Long boardId) {
+        return ResponseEntity.ok(qnaService.getQnAsByBoard(boardId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteQnA(@PathVariable Long lectureId, @PathVariable Long id) {
-        // TODO: 질문/답글 삭제
-        return ResponseEntity.ok("삭제 완료");
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        qnaService.deleteQnA(id);
+        return ResponseEntity.noContent().build();
     }
 }
