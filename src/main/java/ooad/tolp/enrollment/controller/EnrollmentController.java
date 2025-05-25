@@ -15,16 +15,18 @@ public class EnrollmentController {
     private final EnrollmentService enrollmentService;
 
     @PostMapping
-    public ResponseEntity<String> enroll(@RequestBody EnrollmentRequest request) {
-        // TODO: 수강 신청 처리
-        enrollmentService.enroll(request);
-        return ResponseEntity.ok("수강 신청 완료");
+    public ResponseEntity<EnrollmentResponse> enroll(@RequestBody EnrollmentRequest request) {
+        return ResponseEntity.ok(enrollmentService.enroll(request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> cancel(@PathVariable Long id) {
-        // TODO: 수강 취소 처리
+    public ResponseEntity<Void> cancel(@PathVariable Long id) {
         enrollmentService.cancelEnrollment(id);
-        return ResponseEntity.ok("수강 취소 완료");
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<List<EnrollmentResponse>> getByStudent(@PathVariable Long studentId) {
+        return ResponseEntity.ok(enrollmentService.getEnrollmentsByStudent(studentId));
     }
 }
