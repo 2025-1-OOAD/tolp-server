@@ -1,35 +1,34 @@
 package ooad.tolp.quiz.controller;
 
-import ooad.tolp.quiz.dto.*;
-import ooad.tolp.global.security.common.dto.GradeRequest;
+import lombok.RequiredArgsConstructor;
+import ooad.tolp.quiz.dto.QuizRequest;
+import ooad.tolp.quiz.dto.QuizResponse;
+import ooad.tolp.quiz.service.QuizService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/lectures/{lectureId}/quizzes")
+@RequestMapping("/api/quizzes")
+@RequiredArgsConstructor
 public class QuizController {
 
+    private final QuizService quizService;
+
     @PostMapping
-    public ResponseEntity<String> createQuiz(@PathVariable Long lectureId, @RequestBody QuizRequest request) {
-        // TODO: 퀴즈 등록
-        return ResponseEntity.ok("퀴즈 등록 완료");
+    public ResponseEntity<QuizResponse> create(@RequestBody QuizRequest request) {
+        return ResponseEntity.ok(quizService.createQuiz(request));
     }
 
-    @PostMapping("/{quizId}/submit")
-    public ResponseEntity<String> submitQuiz(@PathVariable Long lectureId, @PathVariable Long quizId, @RequestBody QuizAnswerRequest request) {
-        // TODO: 퀴즈 제출
-        return ResponseEntity.ok("퀴즈 제출 완료");
+    @GetMapping("/lecture/{lectureId}")
+    public ResponseEntity<List<QuizResponse>> getByLecture(@PathVariable Long lectureId) {
+        return ResponseEntity.ok(quizService.getQuizzesByLecture(lectureId));
     }
 
-    @PostMapping("/grade")
-    public ResponseEntity<String> gradeQuiz(@PathVariable Long lectureId, @RequestBody GradeRequest request) {
-        // TODO: 퀴즈 채점
-        return ResponseEntity.ok("퀴즈 채점 완료");
-    }
-
-    @GetMapping("/submissions/{submissionId}")
-    public ResponseEntity<SubmissionResponse> getQuizResult(@PathVariable Long lectureId, @PathVariable Long submissionId) {
-        // TODO: 퀴즈 결과 조회
-        return ResponseEntity.ok(new SubmissionResponse());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        quizService.deleteQuiz(id);
+        return ResponseEntity.noContent().build();
     }
 }

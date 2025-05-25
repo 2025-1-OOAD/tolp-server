@@ -1,25 +1,52 @@
 package ooad.tolp.quiz.service;
 
-import ooad.tolp.quiz.dto.*;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import ooad.tolp.quiz.domain.Quiz;
+import ooad.tolp.quiz.dto.QuizRequest;
+import ooad.tolp.quiz.dto.QuizResponse;
+import ooad.tolp.quiz.repository.QuizRepository;
+import ooad.tolp.lecture.domain.Lecture;
+import ooad.tolp.lecture.repository.LectureRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class QuizService {
 
-    public void createQuiz(Long lectureId, QuizRequest request) {
-        // TODO: 퀴즈 등록 처리
+    private final QuizRepository quizRepository;
+    private final LectureRepository lectureRepository;
+
+    public QuizResponse createQuiz(QuizRequest request) {
+        Lecture lecture = lectureRepository.findById(request.getLectureId())
+                .orElseThrow(() -> new EntityNotFoundException("Lecture not found"));
+
+        Quiz quiz = Quiz.builder()
+                .title(request.getTitle())
+                .questionList(request.getQuestionList())
+                .deadline(request.getDeadline())
+                .lecture(lecture)
+                .build();
+
+        return QuizResponse.fromEntity(quizRepository.save(quiz));
     }
 
-    public void submitQuiz(Long lectureId, Long quizId, QuizAnswerRequest request) {
-        // TODO: 퀴즈 제출 처리
+    @Transactional(readOnly = true)
+    public List<QuizResponse> getQuizzesByLecture(Long lectureId) {
+        return quizRepository.findAllByLectureId(lectureId).stream()
+                .map(QuizResponse::fromEntity)
+                .collect(Collectors.toList());
     }
 
-    public void gradeQuiz(Long lectureId, GradeRequest request) {
-        // TODO: 퀴즈 채점 처리
-    }
-
-    public SubmissionResponse getQuizResult(Long lectureId, Long submissionId) {
-        // TODO: 퀴즈 결과 조회 처리
-        return new SubmissionResponse();
+    public void deleteQuiz(Long id) {
+        if (!quizRepository.existsById(id)) {
+            throw new EntityNotFoundException("Quiz not found");
+        }
+        quizRepository.deleteById(id);
     }
 }
