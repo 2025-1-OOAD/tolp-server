@@ -48,9 +48,17 @@ public class LectureService {
         return LectureResponse.fromEntity(lecture);
     }
 
+    @Transactional(readOnly = true)
+    public LectureResponse getLecture(Long id) {
+        Lecture lecture = lectureRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Lecture not found"));
+        return LectureResponse.fromEntity(lecture);
+    }
+
     public List<LectureResponse> getAllLectures() {
         return lectureRepository.findAll().stream()
                 .map(LectureResponse::fromEntity)
                 .collect(Collectors.toList());
     }
+
 }
