@@ -2,10 +2,13 @@ package ooad.tolp.enrollment.controller;
 
 import lombok.RequiredArgsConstructor;
 import ooad.tolp.enrollment.dto.EnrollmentRequest;
+import ooad.tolp.enrollment.dto.EnrollmentResponse;
 import ooad.tolp.enrollment.service.EnrollmentService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/enrollments")
