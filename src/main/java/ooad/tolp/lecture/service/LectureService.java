@@ -12,6 +12,9 @@ import ooad.tolp.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -45,24 +48,9 @@ public class LectureService {
         return LectureResponse.fromEntity(lecture);
     }
 
-    @Transactional(readOnly = true)
-    public LectureResponse getLecture(Long id) {
-        Lecture lecture = lectureRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Lecture not found"));
-        return LectureResponse.fromEntity(lecture);
+    public List<LectureResponse> getAllLectures() {
+        return lectureRepository.findAll().stream()
+                .map(LectureResponse::fromEntity)
+                .collect(Collectors.toList());
     }
-
-    public void updateLectureVideo(Long videoId, LectureVideoRequest request) {
-        // TODO: 강의 영상 업로드 처리
-    }
-
-    public void deleteLectureVideo(Long videoId) {
-        // TODO: 강의 영상 삭제 처리
-    }
-
-    public void getLectureVideos(Long lectureId) {
-        // TODO: 강의 영상 목록 조회 처리
-    }
-
-
 }
