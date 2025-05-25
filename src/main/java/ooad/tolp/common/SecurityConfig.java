@@ -1,9 +1,10 @@
-package ooad.tolp.common;
+package ooad.tolp.global.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,20 +17,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+                .csrf(csrf -> csrf.disable())
+                .headers(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**",
+                                "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll() // H2 콘솔 허용
                         .anyRequest().permitAll()
-                )
-                .csrf((csrf) -> csrf.disable())
-                .httpBasic(Customizer.withDefaults()); // 테스트용 HTTP Basic 로그인 활성화
+                );
 
         return http.build();
     }
 
-    // 🔐 비밀번호 암호화 빈 등록
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
