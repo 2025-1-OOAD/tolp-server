@@ -3,7 +3,7 @@ package ooad.tolp.qna.controller;
 import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.dto.QnARequest;
 import ooad.tolp.lecture.dto.QnAResponse;
-import ooad.tolp.qna.service.QnAService;
+import ooad.tolp.lecture.service.QnAService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
