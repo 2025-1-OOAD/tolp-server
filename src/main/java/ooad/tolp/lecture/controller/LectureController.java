@@ -1,28 +1,31 @@
 package ooad.tolp.lecture.controller;
 
+import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.dto.LectureRequest;
+import ooad.tolp.lecture.dto.LectureResponse;
+import ooad.tolp.lecture.service.LectureService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/lectures")
+@RequiredArgsConstructor
 public class LectureController {
 
+    private final LectureService lectureService;
+
     @PostMapping
-    public ResponseEntity<String> createLecture(@RequestBody LectureRequest request) {
-        // TODO: 강의 개설 처리
-        return ResponseEntity.ok("강의 개설 완료");
+    public ResponseEntity<LectureResponse> createLecture(@RequestBody LectureRequest request) {
+        return ResponseEntity.ok(lectureService.createLecture(request));
     }
 
-    @PutMapping("/{lectureId}")
-    public ResponseEntity<String> updateLecture(@PathVariable Long lectureId, @RequestBody LectureRequest request) {
-        // TODO: 강의 수정 처리
-        return ResponseEntity.ok("강의 수정 완료");
+    @PutMapping("/{id}")
+    public ResponseEntity<LectureResponse> updateLecture(@PathVariable Long id, @RequestBody LectureRequest request) {
+        return ResponseEntity.ok(lectureService.updateLecture(id, request));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<String> searchLecture(@RequestParam String keyword) {
-        // TODO: 강의 검색 처리
-        return ResponseEntity.ok("검색 결과 반환");
+    @GetMapping("/{id}")
+    public ResponseEntity<LectureResponse> getLecture(@PathVariable Long id) {
+        return ResponseEntity.ok(lectureService.getLecture(id));
     }
 }

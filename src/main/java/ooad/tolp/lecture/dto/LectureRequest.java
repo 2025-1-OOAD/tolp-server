@@ -1,15 +1,12 @@
 package ooad.tolp.lecture.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class LectureRequest {
-    private String title;
+    private String name;
     private String syllabus;
     private int durationDays;
     private Long instructorId;
 }
-
