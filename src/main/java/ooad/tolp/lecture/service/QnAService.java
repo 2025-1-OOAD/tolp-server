@@ -1,9 +1,10 @@
-package ooad.tolp.qna.service;
+package ooad.tolp.lecture.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.domain.QnA;
 import ooad.tolp.lecture.domain.QnABoard;
+import ooad.tolp.lecture.repository.QnABoardRepository;
 import ooad.tolp.qna.dto.QnARequest;
 import ooad.tolp.lecture.dto.QnAResponse;
 import ooad.tolp.lecture.repository.QnARepository;

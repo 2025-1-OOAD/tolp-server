@@ -27,13 +27,17 @@ public class EnrollmentService {
     private final LectureRepository lectureRepository;
 
     // 수강신청 처리
-    @Transactional
     public EnrollmentResponse enroll(EnrollmentRequest request) {
         User student = userRepository.findById(request.getStudentId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 학생을 찾을 수 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 학생을 찾을 수 없습니다."));
         Lecture lecture = lectureRepository.findById(request.getLectureId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 강의를 찾을 수 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 강의를 찾을 수 없습니다."));
 
+        if (lecture.isDeleted()) {
+            throw new IllegalStateException("삭제된 강의는 수강 신청할 수 없습니다.");
+        }
+
+        // 중복 수강 신청 방지
         if (enrollmentRepository.existsByStudentAndLecture(student, lecture)) {
             throw new IllegalArgumentException("이미 신청한 강의입니다.");
         }
@@ -48,14 +52,11 @@ public class EnrollmentService {
         return EnrollmentResponse.fromEntity(enrollmentRepository.save(enrollment));
     }
 
-
     // 수강 취소 처리
-    @Transactional
     public void cancelEnrollment(Long id) {
         Enrollment enrollment = enrollmentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("수강 내역을 찾을 수 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("수강 내역을 찾을 수 없습니다."));
         enrollmentRepository.delete(enrollment);
-
     }
 
     @Transactional(readOnly = true)
