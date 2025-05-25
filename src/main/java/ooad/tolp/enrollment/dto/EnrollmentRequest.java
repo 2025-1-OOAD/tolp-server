@@ -1,10 +1,10 @@
 package ooad.tolp.enrollment.dto;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import lombok.*;
+
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class EnrollmentRequest {
-    private Long studentId;
     private Long lectureId;
+    private Long studentId;
 }

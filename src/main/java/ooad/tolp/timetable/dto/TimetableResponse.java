@@ -8,5 +8,5 @@ import java.util.List;
 @Setter
 public class TimetableResponse {
     private Long userId;
-    private List<String> lectures;
+    private List<TimetableLectureResponse> lectures;
 }

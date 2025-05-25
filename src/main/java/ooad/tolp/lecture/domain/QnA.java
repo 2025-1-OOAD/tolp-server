@@ -1,27 +1,31 @@
 package ooad.tolp.lecture.domain;
-import jakarta.persistence.*;
-import ooad.tolp.user.domain.User;
 
+import jakarta.persistence.*;
+import lombok.*;
+import ooad.tolp.user.domain.User;
 import java.time.LocalDateTime;
 
-
 @Entity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnA {
-    @Id @GeneratedValue
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String content;
     private LocalDateTime createdAt;
-
     private LocalDateTime modifiedAt;
     private boolean isDeleted = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "writer_id")
     private User writer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
     private QnABoard board;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id")
     private QnA parent;
 }

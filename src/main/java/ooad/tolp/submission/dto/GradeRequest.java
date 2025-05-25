@@ -1,11 +1,9 @@
-package ooad.tolp.global.security.common.dto;
+package ooad.tolp.submission.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class GradeRequest {
     private Long submissionId;
     private Integer score;

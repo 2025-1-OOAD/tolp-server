@@ -1,32 +1,34 @@
 package ooad.tolp.lecture.controller;
 
+import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.dto.LectureVideoRequest;
 import ooad.tolp.lecture.dto.LectureVideoResponse;
+import ooad.tolp.lecture.service.LectureVideoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/lectures/{lectureId}/videos")
+@RequestMapping("/api/lecture-videos")
+@RequiredArgsConstructor
 public class LectureVideoController {
 
-    @PutMapping("/{videoId}")
-    public ResponseEntity<String> updateVideo(@PathVariable Long lectureId, @PathVariable Long videoId, @RequestBody LectureVideoRequest request) {
-        // TODO: 강의 영상 업로드
-        return ResponseEntity.ok("강의 영상 업로드 완료");
+    private final LectureVideoService lectureVideoService;
+
+    @PostMapping
+    public ResponseEntity<LectureVideoResponse> upload(@RequestBody LectureVideoRequest request) {
+        return ResponseEntity.ok(lectureVideoService.uploadVideo(request));
     }
 
-    @DeleteMapping("/{videoId}")
-    public ResponseEntity<String> deleteVideo(@PathVariable Long lectureId, @PathVariable Long videoId) {
-        // TODO: 강의 영상 삭제
-        return ResponseEntity.ok("강의 영상 삭제 완료");
+    @GetMapping("/lecture/{lectureId}")
+    public ResponseEntity<List<LectureVideoResponse>> getByLecture(@PathVariable Long lectureId) {
+        return ResponseEntity.ok(lectureVideoService.getVideosByLecture(lectureId));
     }
 
-    @GetMapping
-    public ResponseEntity<List<LectureVideoResponse>> getLectureVideos(@PathVariable Long lectureId) {
-        // TODO: 강의 영상 리스트 반환
-        return ResponseEntity.ok(new ArrayList<>());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        lectureVideoService.deleteVideo(id);
+        return ResponseEntity.noContent().build();
     }
 }

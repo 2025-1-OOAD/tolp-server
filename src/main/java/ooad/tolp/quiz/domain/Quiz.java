@@ -1,14 +1,16 @@
 package ooad.tolp.quiz.domain;
-import jakarta.persistence.*;
-import ooad.tolp.assignment.domain.AssignmentSubmission;
-import ooad.tolp.lecture.domain.Lecture;
 
+import jakarta.persistence.*;
+import lombok.*;
+import ooad.tolp.lecture.domain.Lecture;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Quiz {
-    @Id @GeneratedValue
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -18,9 +20,7 @@ public class Quiz {
 
     private LocalDateTime deadline;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lecture_id")
     private Lecture lecture;
-
-    @OneToMany(mappedBy = "quiz")
-    private List<AssignmentSubmission> submissions;
 }

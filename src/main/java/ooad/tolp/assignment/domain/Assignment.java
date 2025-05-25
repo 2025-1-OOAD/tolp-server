@@ -1,23 +1,22 @@
 package ooad.tolp.assignment.domain;
+
 import jakarta.persistence.*;
+import lombok.*;
 import ooad.tolp.lecture.domain.Lecture;
-
 import java.time.LocalDateTime;
-import java.util.List;
-
 
 @Entity
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Assignment {
-    @Id @GeneratedValue
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String description;
     private LocalDateTime dueDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lecture_id")
     private Lecture lecture;
-
-    @OneToMany(mappedBy = "assignment")
-    private List<AssignmentSubmission> submissions;
 }
