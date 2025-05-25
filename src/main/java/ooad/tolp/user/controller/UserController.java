@@ -1,5 +1,7 @@
 package ooad.tolp.user.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import ooad.tolp.user.dto.LoginRequest;
 import ooad.tolp.user.dto.SignUpRequest;
@@ -7,6 +9,8 @@ import ooad.tolp.user.dto.UserResponse;
 import ooad.tolp.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -22,20 +26,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        userService.login(request);
-        return ResponseEntity.ok("로그인 성공");
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
+        String token = userService.login(request);
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getMyInfo(id));
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<String> logout() {
-        userService.logout();
-        return ResponseEntity.ok("로그아웃 성공");
     }
 
     @DeleteMapping("/withdraw")

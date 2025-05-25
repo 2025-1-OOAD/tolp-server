@@ -2,6 +2,7 @@ package ooad.tolp.user.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import ooad.tolp.common.jwt.JwtUtil;
 import ooad.tolp.user.domain.User;
 import ooad.tolp.user.dto.LoginRequest;
 import ooad.tolp.user.dto.SignUpRequest;
@@ -21,6 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TodoRepository todoRepository;
+    private final JwtUtil jwtUtil;
 
     public void signUp(SignUpRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -31,14 +33,13 @@ public class UserService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
-                .username(request.getUsername())
                 .role(request.getRole())
                 .build();
 
         userRepository.save(user);
     }
 
-    public void login(LoginRequest request) {
+    public String login(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("등록되지 않은 사용자입니다."));
 
@@ -46,11 +47,7 @@ public class UserService {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 
-        // TODO: JWT 발급 또는 세션 설정
-    }
-
-    public void logout() {
-        // TODO: JWT 무효화 또는 세션 종료 처리
+        return jwtUtil.generateToken(user); // 🔧 FIX: User 객체 넘기기
     }
 
     public void deleteAccount(Long userId) {

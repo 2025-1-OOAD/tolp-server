@@ -28,7 +28,7 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private String username;
+//    private String username;
 
     @Enumerated(EnumType.STRING)
     private Role role;

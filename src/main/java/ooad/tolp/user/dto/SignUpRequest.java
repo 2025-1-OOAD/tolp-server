@@ -9,6 +9,6 @@ public class SignUpRequest {
     private String email;
     private String password;
     private String name;
-    private String username;
+//    private String username;
     private User.Role role;
 }
