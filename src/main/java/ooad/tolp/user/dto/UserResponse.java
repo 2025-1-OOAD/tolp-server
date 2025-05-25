@@ -1,15 +1,24 @@
 package ooad.tolp.user.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import ooad.tolp.user.domain.User;
 
-// 로그인 성공 또는 GET /me 등에서 사용자 정보를 클라이언트에게 반환할 때 사용하는 응답 DTO
-
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class UserResponse {
     private Long id;
-    private String email;
     private String name;
-    private String role;
+    private String email;
+    private String username;
+    private User.Role role;
+
+    public static UserResponse fromEntity(User user) {
+        return UserResponse.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .email(user.getEmail())
+                .username(user.getUsername())
+                .role(user.getRole())
+                .build();
+    }
 }

@@ -1,14 +1,14 @@
 package ooad.tolp.user.dto;
-import lombok.Getter;
-import lombok.Setter;
 
-// 회원가입 시 사용자가 입력하는 데이터를 담는 요청 DTO
+import lombok.*;
+import ooad.tolp.user.domain.User;
 
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class SignUpRequest {
     private String email;
     private String password;
     private String name;
-    private String role;
+    private String username;
+    private User.Role role;
 }
