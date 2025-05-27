@@ -46,4 +46,9 @@ public class QnAController {
         qnaService.deleteQnA(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/lecture/{lectureId}")
+    public ResponseEntity<List<QnAResponse>> getByLecture(@PathVariable Long lectureId) {
+        return ResponseEntity.ok(qnaService.getQnAsByLecture(lectureId));
+    }
 }

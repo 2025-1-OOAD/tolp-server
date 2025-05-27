@@ -6,7 +6,6 @@ import lombok.*;
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class QnARequest {
     private String content;
-    private Long boardId;
-    private Long writerId;
+    private Long lectureId;
     private Long parentId;
 }
