@@ -3,10 +3,12 @@ package ooad.tolp.lecture.service;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import ooad.tolp.lecture.domain.Lecture;
+import ooad.tolp.lecture.domain.QnABoard;
 import ooad.tolp.lecture.dto.LectureRequest;
 import ooad.tolp.lecture.dto.LectureResponse;
 import ooad.tolp.lecture.dto.LectureVideoRequest;
 import ooad.tolp.lecture.repository.LectureRepository;
+import ooad.tolp.lecture.repository.QnABoardRepository;
 import ooad.tolp.user.domain.User;
 import ooad.tolp.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class LectureService {
 
     private final LectureRepository lectureRepository;
+    private final QnABoardRepository qnaBoardRepository;
     private final UserRepository userRepository;
 
     public List<LectureResponse> getLecturesByInstructor(Long instructorId) {
@@ -37,6 +40,14 @@ public class LectureService {
                 .instructor(instructor)
                 .isDeleted(false)
                 .build();
+
+        QnABoard board = new QnABoard();
+        board.setLecture(lecture);
+        lecture.setQnaBoard(board);
+
+        lectureRepository.save(lecture);
+//        qnaBoardRepository.save(board);
+
         return LectureResponse.fromEntity(lectureRepository.save(lecture));
     }
 
