@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class EnrollmentResponse {
     private Long id;
+    private Long lectureId;
     private String lectureName;
     private String studentName;
     private LocalDateTime enrollmentDate;
@@ -16,6 +17,7 @@ public class EnrollmentResponse {
     public static EnrollmentResponse fromEntity(Enrollment e) {
         return EnrollmentResponse.builder()
                 .id(e.getId())
+                .lectureId(e.getLecture().getId())
                 .lectureName(e.getLecture().getName())
                 .studentName(e.getStudent().getName())
                 .enrollmentDate(e.getEnrollmentDate())
