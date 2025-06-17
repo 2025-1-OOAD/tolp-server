@@ -3,6 +3,8 @@ package ooad.tolp.lecture.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import ooad.tolp.user.domain.User;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,7 +15,11 @@ public class QnA {
     private Long id;
 
     private String content;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
     private LocalDateTime modifiedAt;
     private boolean isDeleted = false;
 

@@ -13,6 +13,7 @@ public class LectureResponse {
     private int durationDays;
     private String instructorName;
     private LocalDateTime createdAt;
+//    private Long instructorId;
 
     public static LectureResponse fromEntity(Lecture lecture) {
         return LectureResponse.builder()
@@ -21,6 +22,7 @@ public class LectureResponse {
                 .syllabus(lecture.getSyllabus())
                 .durationDays(lecture.getDurationDays())
                 .instructorName(lecture.getInstructor().getName())
+//                .instructorId(lecture.getInstructor().getId())
                 .createdAt(lecture.getCreatedAt())
                 .build();
     }
